@@ -1,0 +1,54 @@
+<body>
+    <link rel="stylesheet" href="/css/video-form.css">
+
+    <div id="container">
+        <form action="/video" method="post" enctype="multipart/form-data">
+            <div class="input_elem">
+                <label for="video_name">Video name: </label>
+                <input type="text" name="video_name" id="video_name" class="video_name btn-font-small">
+            </div>
+
+            <div class="input_elem input_video">
+                <video id="video" width="300" controls></video>
+
+                <label for="video_upolad" class="lbl_video_upload">Upload</label>
+                <input type="file" name="file" accept="video/*" class="video_upload" id="video_upolad">
+            </div>
+            
+            <div class="input_elem">
+                <label for="video_description">Video description: </label>
+                <input type="text" name="video_description" id="video_description" class="video_description">
+            </div>
+            
+            <input type="Submit" value="Create video" class="btn-rose btn-font-small">
+        </form>
+    </div>
+
+    <script>
+        const input = document.getElementById('video_upolad');
+        const video = document.getElementById('video');
+        const videoSource = document.createElement('source');
+
+        input.addEventListener('change', function() {
+            const files = this.files || [];
+
+            if (!files.length) return;
+            
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                videoSource.setAttribute('src', e.target.result);
+                video.appendChild(videoSource);
+                video.load();
+            //video.play();
+        };
+        
+        reader.onprogress = function (e) {
+            console.log('progress: ', Math.round((e.loaded * 100) / e.total));
+        };
+        
+        reader.readAsDataURL(files[0]);
+        });
+    </script>
+</body>
+</html>

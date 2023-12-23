@@ -1,0 +1,67 @@
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input_elem {
+    display: flex;
+    flex-direction: column;
+
+    margin: 15px 0;
+}
+
+.video_name {
+    width: 30%;
+    appearance: none;
+    border: none;
+    outline: none;
+    border-bottom: 0.2em solid var(--rose-color);
+    background: var(--yellow-color);
+    border-radius: 0.2em 0.2em 0 0;
+    padding: 0.4em;
+    color: black;
+}
+
+.input_video {
+    flex-direction: row;
+}
+
+.video_upload {
+    display: none;
+}
+
+.lbl_video_upload {
+    width: 20%;
+   
+    color: black;
+    border: 0.2em solid var(--rose-color);
+    background: var(--yellow-color);
+    padding: 7px 1.2em;
+    border-radius: 5px;
+    transition: 1s;
+    height: fit-content;
+    margin-left: 10px;
+
+    align-self: center;
+    text-align: center;
+}
+
+.lbl_video_upload:hover, .lbl_video_upload:focus, .lbl_video_upload:active{
+    background: var(--yellow-dark-color);
+}
+
+.video_description {
+    width: 70%;
+    appearance: none;
+    border: none;
+    outline: none;
+    border-bottom: 0.2em solid var(--rose-color);
+    background: var(--yellow-color);
+    border-radius: 0.2em 0.2em 0 0;
+    padding: 0.4em;
+    color: black;
+}
+
+input[type=submit] {
+    align-self: center;
+}

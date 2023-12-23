@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Judson:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 16px;
+    font-family: var(--main_font);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/*----------------------- VARIABLES -----------------------*/
+
+:root{
+    --main_font: 'Judson', sans-serif;
+    --yellow-color: #F0EEDA;
+    --rose-color: #DAA2C4;
+    --lilac-color: #F7F2FF;
+    --lilac-dark-color: rgb(229, 220, 243);
+    --lilac-dark-color-opacity: rgba(229, 220, 243, 0.5);
+    --yellow-dark-color: #EAE7C7;
+    /* --rose-color: #EEB8CF;
+    --shadow-color: rgba(85, 3, 3, 0.2);
+    --orange-color: rgba(255, 199, 143, 0.6); */
+}
+
+.header {
+    font-family: 'Judson';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.05em;
+}
+
+.btn-rose {
+    background-color: var(--rose-color);
+    border-radius: 5px;
+    border: 0;
+    padding: 7px 51px;
+
+    display: flex;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+.btn-disabled {
+    background-color: var(--yellow-color);
+    border-radius: 5px;
+    border: 3px;
+    padding: 7px 51px;
+}
+
+.btn-font-big {
+    font-size: 18px;
+    line-height: 23px;
+    letter-spacing: 0.05em;
+}
+
+.btn-font-small {
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: 0.05em;
+}
+
+.btn-img {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+/* ------------------------ LIKE IMAGE ---------------------------*/
+.like__img {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+
+    margin-right: 15px;
+    /* position: absolute; */
+    /* right: calc(33px + 25px + 15px); */
+}
+/* -----------------------------------------------------*/
+
+/*--------------------------------- NOTIFICATION ---------------------------*/
+.notification {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    width: 25%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #91709ced;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-white-close {
+    position: absolute;
+    right: 10px;
+
+    border: 0;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+
+    background: none;
+    background-image: url("img/close_white.png");
+    background-size: 16px;
+
+    width: 16px;
+    height: 16px;
+}
+
+.notification_msg {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+/*------------------------ COUNT MSG -----------------------*/
+.nav__inbox {
+    display: flex;
+    align-items: center;
+}
+
+.count-msg {
+    margin-left: 20px;
+    background-color: rgba(145, 112, 156, 0.74);
+    color: white;
+    padding: 3px;
+    border-radius: 10px;
+}

@@ -1,0 +1,79 @@
+<style>
+    .navigation__container {
+        background-color: var(--lilac-color);
+        position: fixed;
+        position: sticky;
+        position: relative;
+
+        height: calc(100vh - 40px);
+        float: left;
+
+        width: 100%;
+
+        margin-right: 25px;
+        border-radius: 21px;
+        padding: 25px;
+    }
+
+    .navigation__item {
+        text-decoration: none;
+    }
+
+    .navigation__item > a {
+        text-decoration: none;
+        font-size: 20px;
+        color: black;
+    }
+
+    .logo {
+        font-size: 24px;
+        text-decoration: underline;
+    }
+
+    .quit {
+        font-size: 22px;
+    }
+
+    ul {
+        list-style: none;
+    }
+
+    .navigation__list {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 70%;
+    }
+
+    .visitor {
+        height: 25%;
+    }
+    /* .navigation__container__inner {
+        width: 210px;
+    } */
+</style>
+<div class="navigation__container" >
+
+    <ul class="navigation__list">
+        <li class="navigation__item logo">LemonTube</li>
+        <li class="navigation__item">
+            <a href="/video/new">
+                <div class="btn-rose btn-font-small">Create</div>
+            </a>
+        </li>
+        <li class="navigation__item">Home</li>
+        <li class="navigation__item">Me</li>
+        <li class="navigation__item">Followers</li>
+        <li class="navigation__item">Following</li>
+        <li class="navigation__item">Liked</li>
+        <li class="navigation__item">Settings</li>
+        <li class="navigation__item quit">Quit</li>
+    </ul>
+
+    {{!-- <ul class="navigation__list visitor">
+        <li class="navigation__item logo">LEMON</li>
+        <li class="navigation__item">Sign In</li>
+        <li class="navigation__item">Sign Up</li>
+    </ul> --}}
+
+</div>

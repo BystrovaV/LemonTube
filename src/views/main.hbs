@@ -1,0 +1,36 @@
+<body>
+    <link rel="stylesheet" href="/css/main.css">
+
+    <div id="app">
+    <div class="search__panel">                
+        <div class="search__inner">
+            <div class="search__wrap">
+                <img class="close__img" src="/images/close.png"/>
+                <input name="search" id="search" placeholder="Search" class="search"/>
+            </div>
+            <button class="btn__submit">
+                <img class="btn__search img" src="/images/loupe.png"/>
+            </button>
+        </div>
+    </div>
+
+    <div class="videos-wrapper">
+        {{#each files}}
+          <div class="video-container">
+            <a href="/video/{{this.dataValues.id}}">
+            <img class="thumbnail" src="data:image/png;base64, {{this.dataValues.thumbnail}}">
+            {{!-- <div class="thumbnail"></div> --}}
+            <div class="video-footer">
+                <div class="video-author-cover"></div>
+                <div class="video-info">
+                    <div class="video-name">{{ this.dataValues.name }}</div>
+                    <p class="video-username">username</p>
+                    <p class="video-statistics">100 views - 1 month ago</p>
+                </div>
+            </div>
+            </a>
+          </div>
+        {{/each}}
+    </div>
+    </div>
+</body>

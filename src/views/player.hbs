@@ -1,0 +1,53 @@
+<body>
+    <link rel="stylesheet" href="/css/player.css">
+
+    <div class="search__panel">                
+        <div class="search__inner">
+            <div class="search__wrap">
+                <img class="close__img" src="/images/close.png"/>
+                <input name="search" id="search" placeholder="Search" class="search"/>
+            </div>
+            <button class="btn__submit">
+                <img class="btn__search img" src="/images/loupe.png"/>
+            </button>
+        </div>
+    </div>
+
+    <div class="video-main-wrapper">
+    <div class="video-container">
+        <video class="video-player" 
+            src="/stream/{{file.dataValues.infoHash}}/{{file.dataValues.filename}}" 
+            poster="data:image/png;base64, {{file.dataValues.thumbnail}}"
+            controls></video>
+        <div class="video-footer">
+            <p class="video-name">{{file.dataValues.name}}</p>
+            <div class="video-author">
+                <div class="video-author-cover"></div>
+                <div class="video-author-info">
+                    <p class="video-username">username</p>
+                    <p class="video-statistics">100 views - 1 month ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="video-sidebar-wrapper">
+        {{#each files}}
+        <a href="/video/{{this.dataValues.id}}">
+          <div class="video-sidebar-container">
+            <img class="video-sidebar-thumbnail" src="data:image/png;base64, {{this.dataValues.thumbnail}}">
+
+            <div class="video-sidebar-footer">
+                <div class="video-sidebar-author-cover"></div>
+                <div class="video-sidebar-info">
+                    <p class="video-sidebar-name">{{ this.dataValues.name }}</p>
+                    <p class="video-sidebar-username">username</p>
+                    <p class="video-sidebar-statistics">100 views - 1 month ago</p>
+                </div>
+            </div>
+          </div>
+        </a>
+        {{/each}}
+    </div>
+    </div>
+</body>

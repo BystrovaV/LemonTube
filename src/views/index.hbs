@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <video  controls>
+          <source src=""/>
+        </video> -->
+        <video :src="videoUrl" controls></video>
+        <ul>
+        {{#each files}}
+          <li :key="{{this.magnet}}">
+            {{ this.name }}
+            <button @click="play({{this}})">PLay</button>
+          </li>
+        {{/each}}
+        </ul>
+        {{!-- <ul>
+          <li v-for="file in files" :key="file.magnet">
+            {{ file.filename }}
+            <button @click="play(file)">PLay</button>
+          </li>
+        </ul> --}}
+        <!-- <div>{{ message }}</div> -->
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue
+      
+        createApp({
+          data() {
+            return {
+              activeVideo: {},
+              files: {{ files }}
+            }
+          },
+          computed: {
+            videoUrl: ({activeVideo}) => activeVideo.name ? `/stream/${activeVideo.magnet}/${activeVideo.name}` : ''
+          },
+          methods: {
+            async play(file) {
+              const response = await axios.get(`/stream/add/${file.magnet}`)
+              this.activeVideo = file
+            }
+          }
+        }).mount('#app')
+      </script>
+</body>
+</html>
