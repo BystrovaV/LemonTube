@@ -92,20 +92,20 @@ npm run dev
 
 1. Форма создания видео
 
-    ![alt text](image.png)
+    ![alt text](screens/image.png)
 
 2. Главная страница
 
-    ![alt text](image-1.png)
+    ![alt text](screens/image-1.png)
 
 3. Результаты поиска
 
-    ![alt text](image-2.png)
+    ![alt text](screens/image-2.png)
 
 4. Страница подписок
 
-    ![alt text](image-3.png)
+    ![alt text](screens/image-3.png)
 
 5. Страница воспроизведения видео
 
-    ![alt text](image-4.png)
+    ![alt text](screens/image-4.png)
