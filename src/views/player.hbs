@@ -1,32 +1,74 @@
 <body>
     <link rel="stylesheet" href="/css/player.css">
 
-    <div class="search__panel">                
-        <div class="search__inner">
-            <div class="search__wrap">
-                <img class="close__img" src="/images/close.png"/>
-                <input name="search" id="search" placeholder="Search" class="search"/>
-            </div>
-            <button class="btn__submit">
-                <img class="btn__search img" src="/images/loupe.png"/>
-            </button>
-        </div>
-    </div>
+    {{> search-panel}}
 
     <div class="video-main-wrapper">
     <div class="video-container">
         <video class="video-player" 
-            src="/stream/{{file.dataValues.infoHash}}/{{file.dataValues.filename}}" 
-            poster="data:image/png;base64, {{file.dataValues.thumbnail}}"
-            controls></video>
+            src="/stream/{{file.dataValues.infoHash}}/{{file.dataValues.filename}}"
+            poster="{{file.dataValues.imageURL}}"
+            controls id="video"></video>
         <div class="video-footer">
             <p class="video-name">{{file.dataValues.name}}</p>
             <div class="video-author">
                 <div class="video-author-cover"></div>
                 <div class="video-author-info">
-                    <p class="video-username">username</p>
-                    <p class="video-statistics">100 views - 1 month ago</p>
+                    <p class="video-username">{{ file.dataValues.person.dataValues.username }}</p>
+                    <p class="video-author-stats">{{ followers }} followers</p>
                 </div>
+                {{#if isNotAuthor}}
+                {{#if isFollowed}}
+                    <div class="btn-disabled">You are following</div>
+                {{else}}
+                    <button class="btn-rose" onclick="follow(this)">Follow</button>
+                {{/if}}
+                {{/if}}
+                <div class="video-info-like">
+                    {{#if isLiked}}
+                        <div class="video-unlike"></div>
+                    {{else}}
+                        <div class="video-like" onclick="like(this)"></div>
+                    {{/if}}
+                    {{likes}}
+                </div>
+            </div>
+            <div class="video-description">
+                <p class="video-statistics">100 views - 
+                    {{#formatRelative file.dataValues.createdAt}}
+                        {{this}}
+                    {{/formatRelative}}
+                </p>
+                <p class="video-text">
+                    {{file.dataValues.description}}
+                </p>
+            </div>
+            <div class="comments">
+                <div class="comment">
+                    <div class="comment-author">
+                        <div class="comment-author-cover"></div>
+                        <div style="width: 90%; display: flex;">
+                            <input type="text" class="comment-input" placeholder="Write a comment" id="comment-input">
+                            <button class="btn-rose" style="padding: 5px; margin-left: 5px;" onclick="comment()">Send Comment</button>
+                        </div>
+                    </div>
+                </div>
+                {{#each comments}}
+                <div class="comment">
+                    <div class="comment-author">
+                        <div class="comment-author-cover"></div>
+                        <div class="comment-author-info">
+                            <p class="comment-username">{{ this.dataValues.person.dataValues.username }}</p>
+                            <p class="comment-author-stats">
+                                {{#formatRelative this.dataValues.createdAt}}
+                                    {{this}}
+                                {{/formatRelative}}
+                            </p>
+                        </div>
+                    </div>
+                    <p>{{this.dataValues.content}}</p>
+                </div>
+                {{/each}}
             </div>
         </div>
     </div>
@@ -35,7 +77,7 @@
         {{#each files}}
         <a href="/video/{{this.dataValues.id}}">
           <div class="video-sidebar-container">
-            <img class="video-sidebar-thumbnail" src="data:image/png;base64, {{this.dataValues.thumbnail}}">
+            <img class="video-sidebar-thumbnail" src="{{this.dataValues.imageURL}}">
 
             <div class="video-sidebar-footer">
                 <div class="video-sidebar-author-cover"></div>
@@ -50,4 +92,57 @@
         {{/each}}
     </div>
     </div>
+
+    <script>
+        const authorUsername = "{{file.dataValues.person.dataValues.username}}"
+        const videoId = "{{file.dataValues.id}}"
+
+        function follow(elem) {
+            event.cancelBubble = true;
+            if(event.stopPropagation) 
+                event.stopPropagation();
+
+            console.log(name);
+            axios.post('/follow', {
+                followed_username: authorUsername
+            })
+            .then((response) => {
+                elem.innerText = "You're Following";
+                elem.classList.remove("btn-rose");
+                elem.classList.add("btn-disabled");
+                elem.removeAttribute("onclick");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        }
+
+        function like(elem){
+            event.cancelBubble = true;
+            if(event.stopPropagation) 
+                event.stopPropagation();
+
+            axios.post(`/video/${videoId}/like`, {})
+            .then((response) => {
+                console.log("GOOD");
+                elem.classList.remove("video-like");
+                elem.classList.add("video-unlike");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        }
+
+        function comment() {
+            const input = document.getElementById("comment-input");
+            
+            axios.post(`/video/${videoId}/comment`, {content: input.value})
+            .then((response) => {
+                console.log("GOOD");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+        }
+    </script>
 </body>

@@ -1,0 +1,75 @@
+<body>
+    <link rel="stylesheet" href="/css/followers.css">
+
+    <div class="search__panel">                
+        <div class="search__inner">
+            <div class="search__wrap">
+                <img class="close__img" src="/images/close.png"/>
+                <input name="search" id="search" placeholder="Search" class="search"/>
+            </div>
+            <button class="btn__submit">
+                <img class="btn__search img" src="/images/loupe.png"/>
+            </button>
+        </div>
+    </div>
+
+    <div>
+        <form action="" class="form-container">
+            <h1 class="sign__header">Follow</h1>
+            <p id="error" style="display: none; color: brown; font-size: 0.8rem;">Error: Unable to follow this user. Please, check User ID.</p>
+
+            <div class="field">
+                <div class="input__field">
+                    <p class="input__label">User ID</p>
+                    <div style="display: flex; align-items: center;">
+                        <input type="text" class="input__name" id="name"
+                        name="username" required
+                        style="padding: 5px 0px;">
+
+                        <div class="btn__container">
+                            <button type="button" class="btn-rose" onclick="follow()">Follow</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <p style="text-align: left; font-size: 0.8rem;">Enter User ID.<br>
+                User ID is user uri of personal page. <br>
+                Example: http://alice.local/@Alice</p>
+        </form>
+
+        {{#each followers.items}}
+        <div class="item item1" id="">
+            <div class="item__left">
+                <h2 class="item__name">{{this.name}}</h2>
+                <p class="item__id">{{this.id}}</p>
+            </div>
+            <div class="btns">
+                <img class="img message" src="/images/message.png">
+                <img class="img visit" id="visit" src="/images/right.png">
+                <img class="img" src="/images/remove.png">
+            </div>
+        </div>
+        {{/each}}
+    </div>
+
+    <script>
+        function follow(elem) {
+            event.cancelBubble = true;
+            if(event.stopPropagation) 
+                event.stopPropagation();
+
+            person_uri = document.getElementById("name").value;
+
+            axios.post('/follow', {
+                followed_id: person_uri
+            })
+            .then((response) => {
+                window.location.reload();
+            })
+            .catch((error) => {
+                document.getElementById("error").style.display = "block";
+            });
+        }
+    </script>
+</body>

@@ -1,0 +1,35 @@
+<body>
+    <link rel="stylesheet" href="/css/videos_vertical.css">
+
+    <div id="app">
+    {{> search-panel}}
+
+    <h2>{{title}}</h2>
+    <div class="videos-wrapper">
+        {{#each videos}}
+        <a href="/video/{{this.dataValues.id}}">
+            <div class="video-container">
+                <img class="thumbnail" src="{{this.dataValues.imageURL}}">
+                <div class="video-footer">
+                    <div class="video-name">{{ this.dataValues.name }}</div>
+                    <p class="video-statistics">100 views - 
+                            {{#formatRelative this.dataValues.createdAt}}
+                                {{this}}
+                            {{/formatRelative}}
+                    </p>
+
+                    <div class="video-author">
+                        <div class="video-author-cover"></div>
+                        <div class="video-info">
+                            <p class="video-username">{{ this.dataValues.person.dataValues.username }}</p>
+                        </div>
+                    </div>
+
+                    <p>{{this.dataValues.description}}</p>
+                </div>
+            </div>
+        </a>
+        {{/each}}
+    </div>
+    </div>
+</body>

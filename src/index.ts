@@ -1,11 +1,25 @@
+import dotenv from "dotenv";
+dotenv.config();
+
 import express, { Application } from 'express'
 import hbs from 'express-handlebars'
+import handlebars from 'handlebars';
 import streamRouter from './modules/routes/routes.torrent.js'
+
 import contentRouter from './modules/routes/routes.content.js'
 import videoRouter from './modules/routes/routes.video.js'
-import dbInit from './modules/db/init.js'
+import personRouter from './modules/routes/routes.activity.js'
+import followRouter from './modules/routes/routes.follow.js'
+import authRouter from './modules/routes/routes.auth.js'
+import likeRouter from './modules/routes/routes.like.js';
 
-dbInit()
+import dbInit from './modules/db/init.js'
+import session from "express-session";
+import { initPassport } from './modules/middleware/passport.mw.js'
+import moment from 'moment';
+import {createClient} from "redis";
+import RedisStore from 'connect-redis';
+import cors from 'cors';
 
 const app: Application = express()
 const port = 3000
@@ -15,20 +29,53 @@ app.engine('hbs', hbs.engine({
     defaultLayout: 'base', 
     layoutsDir: 'src/views/layouts',
     partialsDir  : [
-        //  path to your partials
         'src/views/partials',
-    ]
+    ],
 }));
+
+dbInit()
+
+let redisClient = createClient({
+        url: `redis://${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
+})
+redisClient.connect().catch(console.error)
+
+// Initialize store.
+let redisStore = new RedisStore({
+  client: redisClient,
+  prefix: process.env.REDIS_PREFIX + ":",
+})
+
+app.use(
+    session({
+      secret: 'This is a secret',
+      resave: false,
+      saveUninitialized: false,
+      store: redisStore,
+    })
+);
+initPassport(app);
 
 app.listen(port, ():void => {
     console.log(`Listening on port ${port}`)
 })
 
+handlebars.registerHelper('formatRelative', function(date, options) {
+    const formattedDate = moment(date).fromNow();
+    return options.fn(formattedDate);
+});
+
+app.use(cors())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('src/public'));
 app.set("view engine", "hbs");
 app.set("views", "src/views");
-// hbs.registerPartials("src/views/partials");
 
 app.use('/stream', streamRouter)
 app.use('/', contentRouter)
 app.use('/video', videoRouter)
+app.use('/', followRouter)
+app.use('/', likeRouter)
+app.use('/', personRouter)
+app.use('/auth', authRouter)

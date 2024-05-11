@@ -61,13 +61,12 @@
                 <div class="btn-rose btn-font-small">Create</div>
             </a>
         </li>
-        <li class="navigation__item">Home</li>
-        <li class="navigation__item">Me</li>
-        <li class="navigation__item">Followers</li>
-        <li class="navigation__item">Following</li>
-        <li class="navigation__item">Liked</li>
-        <li class="navigation__item">Settings</li>
-        <li class="navigation__item quit">Quit</li>
+        <li class="navigation__item"><a href="/">Home</a></li>
+        <li class="navigation__item"><a href="/{{user}}/video">Me</a></li>
+        <li class="navigation__item"><a href="/{{user}}/followers">Followers</a></li>
+        <li class="navigation__item"><a href="/{{user}}/following">Following</a></li>
+        <li class="navigation__item"><a href="/{{user}}/liked">Liked</a></li>
+        <li class="navigation__item quit"><a href="/auth/logout">Quit</a></li>
     </ul>
 
     {{!-- <ul class="navigation__list visitor">

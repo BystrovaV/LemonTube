@@ -1,0 +1,31 @@
+<body>
+    <link rel="stylesheet" href="/css/main.css">
+
+    <div id="app">
+    {{> search-panel}}
+    
+    <h2>{{title}}</h2>
+    <div class="videos-wrapper">
+        {{#each videos}}
+          <div class="video-container">
+            <a href="/video/{{this.dataValues.id}}">
+            <img class="thumbnail" src="{{this.dataValues.imageURL}}">
+            {{!-- <div class="thumbnail"></div> --}}
+            <div class="video-footer">
+                <div class="video-author-cover"></div>
+                <div class="video-info">
+                    <div class="video-name">{{ this.dataValues.name }}</div>
+                    <p class="video-username">{{ this.dataValues.person.dataValues.username }}</p>
+                    <p class="video-statistics">100 views - 
+                        {{#formatRelative this.dataValues.createdAt}}
+                            {{this}}
+                        {{/formatRelative}}
+                    </p>
+                </div>
+            </div>
+            </a>
+          </div>
+        {{/each}}
+    </div>
+    </div>
+</body>

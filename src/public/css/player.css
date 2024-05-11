@@ -18,13 +18,13 @@
     margin: 10px 0 15px 0;
 }
 
-.video-author {
+.video-author, .comment-author {
     display: flex;
     align-items: center;
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
-.video-author-cover{
+.video-author-cover, .comment-author-cover{
     width: 50px;
     height: 50px;
 
@@ -34,12 +34,68 @@
     border-radius: 25px;
 }
 
+.video-author-info, .comment-author-info {
+    margin-right: 10px;
+}
+
 .video-name {
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 
+.video-info-like {
+    display: flex;
+    margin-left: 10px;
+}
 
+.video-like {
+    background: none;
+    background-image: url("/images/heart.png");
+    background-size: 25px;
+
+    width: 25px;
+    height: 25px;
+}
+
+.video-unlike {
+    background: none;
+    background-image: url("/images/black_heart.png");
+    background-size: 25px;
+
+    width: 25px;
+    height: 25px;
+}
+
+.video-description {
+    word-break: break-all;
+    width: 600px;
+    background-color: var(--yellow-color);
+    border-radius: 15px;
+    padding: 10px;
+    margin: 15px 0;
+}
+
+.video-text {
+    padding-top: 10px;
+}
+
+.comment {
+    background-color: var(--lilac-color);
+    border-radius: 15px;
+    padding: 10px;
+    margin: 15px 0;
+}
+
+.comment-input {
+    width: 80%;
+    /* padding: 12px 20px; */
+    box-sizing: border-box;
+    border: none;
+    background: none;
+    border-bottom: 2px solid #eeb8cf;
+    outline: none;
+}
 /*----------------------------------- VIDEOS SIDEBAR ---------------------------*/
 .video-sidebar-wrapper {
     margin-top: 20px;
